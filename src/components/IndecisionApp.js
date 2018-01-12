@@ -3,12 +3,18 @@ import AddOption from './AddOption.js';
 import Header from './Header.js';
 import Action from './Action.js';
 import Options from './Options.js';
+import OptionModal from './OptionModal.js';
  
 export default class IndecisionApp extends React.Component {
   state = { options: [] };
   
   handleDeleteOptions = () => {
-    this.setState(() => ({ options: [] }));
+    this.setState(() => (
+      {
+        options: [],
+        selectedOption: undefined 
+      }
+    ));
   };
 
   handleDeleteOption = (option) => {
@@ -17,7 +23,12 @@ export default class IndecisionApp extends React.Component {
 
   handlePick = () => {
     const randomOptionNumber = Math.floor(Math.random() * this.state.options.length);
-    alert(this.state.options[randomOptionNumber]);
+    const option = this.state.options[randomOptionNumber];
+    this.setState(() => (
+      {
+        selectedOption: option
+      }
+    )); 
   };
 
   handleAddOption = (option) => {
@@ -29,6 +40,12 @@ export default class IndecisionApp extends React.Component {
 
     this.setState((prevState) => ({ options: prevState.options.concat(option) }));
   };
+
+  handleCloseModal = () => {
+    this.setState((prevState) => ({
+      selectedOption: undefined
+    })); 
+  }
 
   componentDidMount() {
 
@@ -54,21 +71,27 @@ export default class IndecisionApp extends React.Component {
   } 
 
   componentWillUnmount() {
-    console.log("Component will unmount");
+    console.log("Component will unmount"); 
   }
   
   render() {
-    const subtitle = 'Put your life in the hands of a computer';
+    const subtitle = 'Put your life in the hands of a computer'; 
 
     return (
-      <div>
+      <div> 
         <Header subtitle={subtitle} />
-        <Action hasOptions={this.state.options.length > 0} handlePick={this.handlePick}/>
-        <Options 
-          options={this.state.options} 
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}/>
-        <AddOption handleAddOption={this.handleAddOption}/>
+        <div className="container">
+          <Action hasOptions={this.state.options.length > 0} handlePick={this.handlePick}/>
+          <Options 
+            options={this.state.options} 
+            handleDeleteOptions={this.handleDeleteOptions}
+            handleDeleteOption={this.handleDeleteOption}/>
+          <AddOption handleAddOption={this.handleAddOption}/>
+          <OptionModal 
+            selectedOption={this.state.selectedOption}
+            handleCloseModal={this.handleCloseModal}
+          /> 
+        </div>
       </div>
     );
   }
@@ -76,4 +99,4 @@ export default class IndecisionApp extends React.Component {
 
 IndecisionApp.defaultProps = {
   options: []
-};
+}; 

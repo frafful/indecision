@@ -2,14 +2,23 @@ import React from 'react';
 import Option from './Option.js';
 
 
-const Options = (props) => {
-  return (
-    <div>
-      <button onClick={props.handleDeleteOptions}>Remove All</button>
+const Options = (props) =>  
+(
+  <div className="options"> 
+    <div className="options__header clear-fix">
+      <h3 className="heading-tertiary float-left">Your Options</h3>
+      <button 
+      onClick={props.handleDeleteOptions}
+      className="btn-transparent float-right"
+      >
+        Remove All
+      </button>
+    </div>
+    <div className="">
       <ol>
         {
           props.options.map((option) => (
-            <Option 
+            <Option
               key={option} 
               optionText={option} 
               handleDeleteOption={props.handleDeleteOption}
@@ -18,7 +27,7 @@ const Options = (props) => {
         }
       </ol>
     </div>
-  );
-};
+  </div>
+);
 
 export default Options;
