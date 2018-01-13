@@ -9,4 +9,18 @@
     width: 100%;
     padding: $m-size;
   }
+
+  .option {
+    color: white;
+    width: 100%;
+    background-color: $color-off-gray;
+    padding: 3rem 1rem;
+    border-bottom: 1px solid darken($color-light-blue, 20);
+    
+    p {
+      font-size: 2rem;
+      word-break: break-all;
+    }
+  }
 }
+

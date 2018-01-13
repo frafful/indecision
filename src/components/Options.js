@@ -14,19 +14,16 @@ const Options = (props) =>
         Remove All
       </button>
     </div>
-    <div className="">
-      <ol>
-        {
-          props.options.map((option) => (
-            <Option
-              key={option} 
-              optionText={option} 
-              handleDeleteOption={props.handleDeleteOption}
-              />)
-          )
-        }
-      </ol>
-    </div>
+      {
+        props.options.map((option, index) => (
+          <Option
+            key={option} 
+            optionText={option}
+            count={index + 1} 
+            handleDeleteOption={props.handleDeleteOption}
+            />)
+        )
+      }
   </div>
 );
 
